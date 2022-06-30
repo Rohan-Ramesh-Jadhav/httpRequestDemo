@@ -5,17 +5,24 @@
 	>Click</button>
 	<!-- pagenataion section-->
 	<ngb-pagination class="my-4"
-		[page]="page"
-		[collectionSize]="arr.length"
-		[pageSize]="pageSize"
+		[(page)]="page"
+		[pageSize]="rowPerPage"
+		[collectionSize]="tableDataArr.length"
 	></ngb-pagination>
 	<!-- table section -->
-	<table class="table my-2 w-50">
-		<tbody class="text-center">
-			<th>Name</th>
-			<tr *ngFor="let eachData of arr | slice : (page-1)*pageSize : page*pageSize">
-				<td>{{eachData}}</td>
+	<table class="table table-bordered w-50">
+		<thead style="border-bottom: black;">
+			<tr>
+				<th class="text-center">Name</th>
+				<th class="text-center">Capacity</th>
+				<th class="text-center">Station Id</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center" *ngFor="let eachRow of tableDataArr | slice: (page-1)*rowPerPage : page*rowPerPage">
+				<td *ngFor="let eachData of eachRow"> {{eachData}} </td>
 			</tr>
 		</tbody>
 	</table>
+	
 </div>

@@ -12,24 +12,26 @@ import { HttpServiceService } from './services/http-service.service';
 export class AppComponent {
 	//loacl members of the class	
 	title = 'httpRequestDemo';
-	page:number = 1;
-	pageSize:number = 10;
-	arr:any=[];
-	arrayLen:number=0;
+	// table variables
+	showRow = true;
+	rowPerPage = 100;
+	page = 1;
 	
+  //table matrix [array] data
+	tableDataArr:any[] = [];
 	constructor(private httpService:HttpServiceService){}
 	
 	//fetch the data from the service which intern fetch the data from the api 
 	fetchData(){
 		let responseData:object =  this.httpService.jsonData;
 		let {data:{stations}}:any = responseData;
-		for(let eachEntry in stations){
-			let {name,capacity}:any = stations[eachEntry];
-			let arr1:any[] = [];
-			arr1.push(name);
-			this.arr.push(arr1);
+		for(let eachVal in stations)
+		{
+			let arr:[string,number][] = []
+			arr.push(stations[eachVal].name);
+			arr.push(stations[eachVal].capacity);
+			arr.push(stations[eachVal].station_id);
+			this.tableDataArr.push(arr);
 		}
-		this.arrayLen = this.arr.length;
-		console.log(this.arr);
 	}
 }
