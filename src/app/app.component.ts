@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck} from '@angular/core';
 import { HttpServiceService } from './services/http-service.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { HttpServiceService } from './services/http-service.service';
 		HttpServiceService
 	]
 })
-export class AppComponent {
+export class AppComponent implements DoCheck {
 	/**
 	 * @param title - is the title to the project 
 	*/	
@@ -28,6 +28,7 @@ export class AppComponent {
 	 * @function fetchData - is the function which will make set of needed data for tables
 	*/
 	tableDataArr:any[] = [];
+	PostData:any;
 	constructor(private httpService:HttpServiceService){}
 	
 	//fetch the data from the service which intern fetch the data from the api 
@@ -42,5 +43,13 @@ export class AppComponent {
 			arr.push(stations[eachVal].station_id);
 			this.tableDataArr.push(arr);
 		}
+	}
+
+	sendData(txt:string){
+		this.httpService.putData(txt);
+	}
+
+	ngDoCheck(): void {
+		this.PostData = this.httpService.POSTres;
 	}
 }

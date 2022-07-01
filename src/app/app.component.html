@@ -1,30 +1,40 @@
 <div class="container-fluid d-flex justify-content-center align-items-center my-4 flex-column">
-	<!-- button to fetch the data -->
-	<button class="btn btn-primary"
-		(click)="fetchData()"
-		style="width: 10%;"
-	>Click</button>
-	<!-- table section -->
-	<table class="table table-primary table-bordered w-50 my-4">
-		<thead class="bg-ligth" style="border-bottom: black;">
-			<tr>
-				<th class="text-center">Name</th>
-				<th class="text-center">Capacity</th>
-				<th class="text-center">Station Id</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="text-center" *ngFor="let eachRow of tableDataArr | slice: (page-1)*rowPerPage : page*rowPerPage">
-				<td *ngFor="let eachData of eachRow"> {{eachData}} </td>
-			</tr>
-		</tbody>
-	</table>
-	<!-- pagenataion section-->
-	<ngb-pagination class="my-4"
-		[(page)]="page"
-		[pageSize]="rowPerPage"
-		[collectionSize]="tableDataArr.length"
-		[maxSize]="10"
-		[ellipses]="true"
-	></ngb-pagination>
+	<div class="d-flex flex-column w-50 align-items-center">
+		<h4 class="text-center my-4">GET method Results. Click button for results</h4>
+		<!-- button to fetch the data -->
+			<button class="btn btn-primary w-25"
+			(click)="fetchData()"
+		>Click</button>
+		<!-- table section -->
+		<table class="table table-primary table-bordered my-2">
+			<thead class="bg-ligth" style="border-bottom: black;">
+				<tr>
+					<th class="text-center">Name</th>
+					<th class="text-center">Capacity</th>
+					<th class="text-center">Station Id</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-center" *ngFor="let eachRow of tableDataArr | slice: (page-1)*rowPerPage : page*rowPerPage">
+					<td *ngFor="let eachData of eachRow"> {{eachData}} </td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- pagenataion section-->
+		<ngb-pagination class="my-2"
+			[(page)]="page"
+			[pageSize]="rowPerPage"
+			[collectionSize]="tableDataArr.length"
+			[maxSize]="10"
+			[ellipses]="true"
+		></ngb-pagination>
+	</div>
+	<h4 class="text-center my-4">POST method . Type and click send</h4>
+	<div class="d-flex justify-content-center">
+		<input #postInput type="text" class="form-control">
+		<button (click)="sendData(postInput.value)" class="btn btn-success mx-2 w-50">Send</button>
+	</div>
+	<textarea disabled class="form-control w-50 my-4">
+		{{PostData | json}}
+	</textarea>
 </div>

@@ -9,17 +9,20 @@ import { catchError, retry } from 'rxjs/operators';
 export class HttpServiceService {
 
 	//this is the base URL
-	baseUrl:string = 'https://gbfs.citibikenyc.com/gbfs/en/station_information.json';
+	baseGETUrl:string = 'https://gbfs.citibikenyc.com/gbfs/en/station_information.json';
+	basicPOSTUrl:string = 'https://httpbin.org/post';
 	
 	//the constructor will create the http access
 	constructor(private http:HttpClient) {
 		this.getDataFun();
 	}
+
 	jsonData:any;
+	POSTres:any;
 	getDataFun(){
 		//this is get request will return the data as observable
 		this.http.get(
-			this.baseUrl,
+			this.baseGETUrl,
 			{
 				responseType:"json",
 			}
@@ -40,5 +43,23 @@ export class HttpServiceService {
 				console.log('request completed')
 			}
 		)
+	}
+
+	//function to post the data
+	putData(data:string){
+		
+		this.http.post(
+			this.basicPOSTUrl, data
+		).subscribe(
+			(response)=>{
+				this.POSTres = response;
+			},
+			(err)=>{
+				console.log('POST ERR: '+err)
+			},
+			()=>{
+				console.log('POST REQUEST COMPLETED')
+			}
+		);
 	}
 }
