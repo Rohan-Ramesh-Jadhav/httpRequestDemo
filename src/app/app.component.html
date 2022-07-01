@@ -1,17 +1,12 @@
 <div class="container-fluid d-flex justify-content-center align-items-center my-4 flex-column">
 	<!-- button to fetch the data -->
-	<button class="btn btn-primary w-25"
+	<button class="btn btn-primary"
 		(click)="fetchData()"
+		style="width: 10%;"
 	>Click</button>
-	<!-- pagenataion section-->
-	<ngb-pagination class="my-4"
-		[(page)]="page"
-		[pageSize]="rowPerPage"
-		[collectionSize]="tableDataArr.length"
-	></ngb-pagination>
 	<!-- table section -->
-	<table class="table table-bordered w-50">
-		<thead style="border-bottom: black;">
+	<table class="table table-primary table-bordered w-50 my-4">
+		<thead class="bg-ligth" style="border-bottom: black;">
 			<tr>
 				<th class="text-center">Name</th>
 				<th class="text-center">Capacity</th>
@@ -24,5 +19,12 @@
 			</tr>
 		</tbody>
 	</table>
-	
+	<!-- pagenataion section-->
+	<ngb-pagination class="my-4"
+		[(page)]="page"
+		[pageSize]="rowPerPage"
+		[collectionSize]="tableDataArr.length"
+		[maxSize]="10"
+		[ellipses]="true"
+	></ngb-pagination>
 </div>

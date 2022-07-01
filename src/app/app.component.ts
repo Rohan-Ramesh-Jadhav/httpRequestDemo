@@ -10,14 +10,23 @@ import { HttpServiceService } from './services/http-service.service';
 	]
 })
 export class AppComponent {
-	//loacl members of the class	
+	/**
+	 * @param title - is the title to the project 
+	*/	
 	title = 'httpRequestDemo';
-	// table variables
-	showRow = true;
-	rowPerPage = 100;
+	/**
+	 * @param rowPerPage - is the value to pageination tells how many entries per page
+	 * @param page - is the initial page for paginataion
+	*/
+	rowPerPage = 10;
 	page = 1;
 	
-  //table matrix [array] data
+	/**
+	 * @param tableDataArr - is the array holds set of arrays of each entry represent each row
+	 * @constructor - will set the http service variable
+	 * @private @param httpService - is the http service variable
+	 * @function fetchData - is the function which will make set of needed data for tables
+	*/
 	tableDataArr:any[] = [];
 	constructor(private httpService:HttpServiceService){}
 	
